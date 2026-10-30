@@ -82,6 +82,7 @@ button {
     place-items: center;
     font-size: 24px;
     font-weight: bold;
+    flex-shrink: 0;
 }
 
 .brand h2 {
@@ -132,12 +133,21 @@ button {
     margin-top: 4px;
 }
 
+/* Navigation headings */
+
 .nav-heading {
     color: #8FA8CB;
     font-size: 10px;
     font-weight: bold;
     letter-spacing: 1px;
     padding: 13px 10px 8px;
+}
+
+/* Navigation links */
+
+.navigation {
+    display: flex;
+    flex-direction: column;
 }
 
 .nav-link {
@@ -152,10 +162,22 @@ button {
     transition: 0.2s ease;
 }
 
-.nav-link span {
-    font-size: 18px;
+/* Navigation icons */
+
+.nav-link i {
     width: 22px;
+    min-width: 22px;
     text-align: center;
+    font-size: 16px;
+}
+
+/* Navigation text */
+
+.nav-link span {
+    font-size: 13px;
+    width: auto;
+    text-align: left;
+    line-height: 1.4;
 }
 
 .nav-link:hover,
@@ -168,7 +190,7 @@ button {
     border-left: 3px solid #79AEFF;
 }
 
-/* Support the sidebar navigation used by inner pages */
+/* Support older sidebar navigation */
 
 .sidebar-nav {
     display: flex;
@@ -189,6 +211,7 @@ button {
 
 .sidebar-nav a i {
     width: 22px;
+    min-width: 22px;
     text-align: center;
     font-size: 16px;
 }
@@ -202,6 +225,8 @@ button {
 .sidebar-nav a.active {
     border-left: 3px solid #79AEFF;
 }
+
+/* Sidebar footer */
 
 .sidebar-footer {
     display: flex;
@@ -573,8 +598,6 @@ button {
     .sidebar.open {
         left: 0;
     }
-
-    /* Show both supported hamburger button classes */
 
     .menu-button,
     .menu-toggle {

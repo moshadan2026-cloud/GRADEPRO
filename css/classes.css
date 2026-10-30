@@ -1,7 +1,8 @@
 
 /* =========================================
    GRADEPRO - CLASSES MANAGEMENT
-   Shared theme: css/style.css
+   Classes-specific stylesheet only
+   Shared layout: css/style.css
 ========================================= */
 
 /* PAGE LAYOUT */
@@ -14,7 +15,7 @@
 
 /* PAGE HEADING */
 
-.page-heading {
+.classes-page .page-heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,15 +23,15 @@
     margin-bottom: 24px;
 }
 
-.page-heading h1 {
+.classes-page .page-heading h1 {
     color: var(--navy);
     font-size: 27px;
     font-weight: 700;
     margin: 0 0 7px;
 }
 
-.page-heading p,
-.panel-heading p {
+.classes-page .page-heading p,
+.classes-page .panel-heading p {
     color: var(--slate);
     margin: 0;
     font-size: 14px;
@@ -83,7 +84,7 @@
     margin-right: 7px;
 }
 
-/* STATISTICS */
+/* CLASS STATISTICS */
 
 .class-stats {
     display: grid;
@@ -100,7 +101,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    box-shadow: 0 3px 12px rgba(7, 29, 73, 0.05);
+    box-shadow: var(--shadow);
     min-width: 0;
 }
 
@@ -137,11 +138,11 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 22px;
-    box-shadow: 0 3px 12px rgba(7, 29, 73, 0.05);
+    box-shadow: var(--shadow);
     min-width: 0;
 }
 
-.panel-heading {
+.classes-page .panel-heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -149,15 +150,15 @@
     margin-bottom: 22px;
 }
 
-.panel-heading h2 {
+.classes-page .panel-heading h2 {
     color: var(--navy);
     font-size: 19px;
     margin: 0 0 6px;
 }
 
-/* SEARCH */
+/* SEARCH BOX */
 
-.search-box {
+.classes-page .search-box {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -169,16 +170,16 @@
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.search-box:focus-within {
+.classes-page .search-box:focus-within {
     border-color: var(--royal);
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-.search-box i {
+.classes-page .search-box i {
     color: var(--slate);
 }
 
-.search-box input {
+.classes-page .search-box input {
     border: none;
     outline: none;
     padding: 11px 0;
@@ -189,7 +190,7 @@
     color: var(--navy);
 }
 
-/* TABLE */
+/* CLASS TABLE */
 
 .table-wrapper {
     width: 100%;
@@ -231,13 +232,13 @@
     border-bottom: none;
 }
 
-.empty-message {
+.classes-table .empty-message {
     text-align: center;
     padding: 35px !important;
     color: var(--slate) !important;
 }
 
-/* TABLE ACTIONS */
+/* TABLE ACTION BUTTONS */
 
 .action-btn {
     border: none;
@@ -255,14 +256,14 @@
 }
 
 .delete-btn {
-    color: #b42336;
+    color: #B42336;
 }
 
 .action-btn:hover {
     background: var(--pale-blue);
 }
 
-/* ADD / EDIT MODAL */
+/* ADD / EDIT CLASS MODAL */
 
 .modal {
     display: none;
@@ -379,7 +380,9 @@
     background: var(--pale-blue);
 }
 
-/* RESPONSIVE DESIGN */
+/* =========================================
+   RESPONSIVE CLASSES PAGE
+========================================= */
 
 @media (max-width: 800px) {
 
@@ -391,13 +394,13 @@
         grid-template-columns: 1fr;
     }
 
-    .page-heading,
-    .panel-heading {
+    .classes-page .page-heading,
+    .classes-page .panel-heading {
         align-items: flex-start;
         flex-direction: column;
     }
 
-    .search-box {
+    .classes-page .search-box {
         width: 100%;
     }
 }
@@ -408,7 +411,7 @@
         padding: 14px;
     }
 
-    .page-heading h1 {
+    .classes-page .page-heading h1 {
         font-size: 22px;
     }
 
@@ -432,4 +435,3 @@
         width: 100%;
     }
 }
-

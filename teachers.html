@@ -1,1 +1,410 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRADEPRO | Teachers Management</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+.page-content { padding: 25px; }
+.page-heading {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:25px;
+}
+.page-heading h1 { color:#071D49; margin:0 0 6px; }
+.page-heading p { color:#64748B; margin:0; }
+.primary-btn {
+    background:#071D49;
+    color:white;
+    border:0;
+    padding:12px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+}
+.primary-btn:hover { background:#123B73; }
+.demo-notice {
+    background:#FFF7E6;
+    color:#8A5A00;
+    border:1px solid #F4D89B;
+    padding:13px 16px;
+    border-radius:9px;
+    margin-bottom:22px;
+    font-size:13px;
+}
+.teacher-stats {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+    margin-bottom:25px;
+}
+.teacher-stat {
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 3px 12px rgba(0,0,0,.04);
+    border:1px solid #DCE4EF;
+}
+.teacher-stat span { color:#64748B; font-size:13px; }
+.teacher-stat h2 { color:#071D49; margin:10px 0 0; font-size:28px; }
+.teacher-stat i {
+    color:#2563EB;
+    font-size:20px;
+    margin-bottom:12px;
+}
+.table-panel {
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    border:1px solid #DCE4EF;
+    overflow:hidden;
+}
+.table-tools {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+.table-tools h2 { color:#071D49; font-size:18px; margin:0; }
+.search-box {
+    padding:11px 13px;
+    border:1px solid #DCE4EF;
+    border-radius:8px;
+    width:260px;
+    max-width:100%;
+}
+.table-scroll { overflow-x:auto; }
+table { width:100%; border-collapse:collapse; min-width:750px; }
+th,td {
+    padding:14px 12px;
+    border-bottom:1px solid #E8EDF4;
+    text-align:left;
+    font-size:13px;
+}
+th { color:#64748B; background:#F5F8FC; }
+td { color:#334155; }
+.empty-state { text-align:center; padding:35px; color:#64748B; }
+.status-active {
+    background:#DCFCE7;
+    color:#166534;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+.status-inactive {
+    background:#FEE2E2;
+    color:#991B1B;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+.action-btn {
+    border:0;
+    background:#EAF1FB;
+    color:#123B73;
+    padding:7px 9px;
+    border-radius:6px;
+    margin-right:4px;
+    cursor:pointer;
+}
+.modal {
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(7,29,73,.55);
+    z-index:1000;
+    justify-content:center;
+    align-items:center;
+    padding:15px;
+}
+.modal.show { display:flex; }
+.modal-content {
+    background:white;
+    width:100%;
+    max-width:600px;
+    max-height:90vh;
+    overflow-y:auto;
+    border-radius:13px;
+    padding:25px;
+}
+.modal-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+.modal-header h2 { color:#071D49; margin:0; }
+.close-btn {
+    border:0;
+    background:none;
+    font-size:23px;
+    cursor:pointer;
+    color:#64748B;
+}
+.form-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+.form-group { margin-bottom:15px; }
+.form-group label {
+    display:block;
+    margin-bottom:7px;
+    color:#334155;
+    font-size:13px;
+    font-weight:600;
+}
+.form-group input,
+.form-group select {
+    width:100%;
+    padding:12px;
+    border:1px solid #DCE4EF;
+    border-radius:7px;
+    box-sizing:border-box;
+    background:white;
+}
+.form-actions {
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:15px;
+}
+.secondary-btn {
+    background:#EAF1FB;
+    color:#123B73;
+    border:0;
+    padding:12px 18px;
+    border-radius:8px;
+    cursor:pointer;
+}
+@media(max-width:600px) {
+    .page-content { padding:15px; }
+    .form-grid { grid-template-columns:1fr; }
+    .table-panel { padding:13px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar" id="sidebar">
+    <div class="brand">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <div>
+            <h2>GRADEPRO</h2>
+            <small>ASSESS · ANALYSE · ACHIEVE</small>
+        </div>
+    </div>
+
+    <div class="school-info">
+        <i class="fa-solid fa-school"></i>
+        <div>
+            <strong>My School</strong>
+            <small>School Administrator</small>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+        <a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+        <a href="students.html"><i class="fa-solid fa-user-graduate"></i> Students</a>
+        <a href="teachers.html" class="active"><i class="fa-solid fa-chalkboard-user"></i> Teachers</a>
+        <a href="classes.html"><i class="fa-solid fa-chalkboard"></i> Classes</a>
+        <a href="subjects.html"><i class="fa-solid fa-book-open"></i> Subjects</a>
+        <a href="marks.html"><i class="fa-solid fa-pen-to-square"></i> Marks Management</a>
+        <a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a>
+        <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+        <a href="#"><i class="fa-solid fa-circle-question"></i> Help & Support</a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <i class="fa-solid fa-user-shield"></i>
+        <span>Administrator account</span>
+    </div>
+</div>
+
+<div class="main-content">
+    <header class="topbar">
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div>
+            <strong>Teachers Management</strong>
+        </div>
+        <div class="topbar-actions">
+            <i class="fa-regular fa-bell"></i>
+        </div>
+    </header>
+
+    <main class="page-content">
+
+        <section class="page-heading">
+            <div>
+                <h1>Teachers Management</h1>
+                <p>Register, organise and manage your school's teaching staff.</p>
+            </div>
+            <button class="primary-btn" id="openTeacherModal">
+                <i class="fa-solid fa-plus"></i> Add New Teacher
+            </button>
+        </section>
+
+        <div class="demo-notice">
+            <i class="fa-solid fa-circle-info"></i>
+            <strong>Prototype mode:</strong> Teacher records are currently stored
+            in this browser only. Do not enter real school staff information.
+        </div>
+
+        <section class="teacher-stats">
+            <div class="teacher-stat">
+                <i class="fa-solid fa-users"></i>
+                <span>Total Teachers</span>
+                <h2 id="teacherCount">0</h2>
+            </div>
+
+            <div class="teacher-stat">
+                <i class="fa-solid fa-user-check"></i>
+                <span>Active Teachers</span>
+                <h2 id="activeTeacherCount">0</h2>
+            </div>
+
+            <div class="teacher-stat">
+                <i class="fa-solid fa-book"></i>
+                <span>Subjects Taught</span>
+                <h2 id="teacherSubjectCount">0</h2>
+            </div>
+        </section>
+
+        <section class="table-panel">
+            <div class="table-tools">
+                <h2>Registered Teachers</h2>
+                <input
+                    type="search"
+                    class="search-box"
+                    id="teacherSearch"
+                    placeholder="Search teachers..."
+                    aria-label="Search teachers"
+                >
+            </div>
+
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Teacher ID</th>
+                            <th>Teacher Name</th>
+                            <th>Gender</th>
+                            <th>Subject</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="teachersTableBody">
+                        <tr>
+                            <td colspan="7" class="empty-state">
+                                No teachers registered yet.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- Teacher Registration Modal -->
+<div class="modal" id="teacherModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="teacherModalTitle">Register New Teacher</h2>
+            <button class="close-btn" id="closeTeacherModal" aria-label="Close">
+                &times;
+            </button>
+        </div>
+
+        <form id="teacherForm">
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="teacherId">Teacher ID *</label>
+                    <input type="text" id="teacherId" required placeholder="e.g. TCH001">
+                </div>
+
+                <div class="form-group">
+                    <label for="staffNumber">Staff Number *</label>
+                    <input type="text" id="staffNumber" required placeholder="e.g. STF001">
+                </div>
+
+                <div class="form-group">
+                    <label for="teacherFirstName">First Name *</label>
+                    <input type="text" id="teacherFirstName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="teacherLastName">Last Name *</label>
+                    <input type="text" id="teacherLastName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="teacherGender">Gender *</label>
+                    <select id="teacherGender" required>
+                        <option value="">Select gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="teacherPhone">Phone Number</label>
+                    <input type="tel" id="teacherPhone" placeholder="Phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="teacherEmail">Email Address</label>
+                    <input type="email" id="teacherEmail" placeholder="Email address">
+                </div>
+
+                <div class="form-group">
+                    <label for="teacherSubject">Main Subject *</label>
+                    <input type="text" id="teacherSubject" required placeholder="e.g. Mathematics">
+                </div>
+
+                <div class="form-group">
+                    <label for="teacherStatus">Employment Status *</label>
+                    <select id="teacherStatus" required>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="secondary-btn" id="cancelTeacherModal">
+                    Cancel
+                </button>
+                <button type="submit" class="primary-btn" id="saveTeacherBtn">
+                    Save Teacher
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/teachers.js"></script>
+
+</body>
+</html>
+

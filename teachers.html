@@ -10,6 +10,65 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <style>
+    
+/* GRADEPRO TOPBAR MENU BUTTON */
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    min-height: 75px;
+    padding: 12px 25px;
+    background: #FFFFFF;
+    border-bottom: 1px solid #DCE4EF;
+}
+
+.menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #071D49;
+    font-size: 21px;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.menu-toggle:hover {
+    background: #EAF1FB;
+}
+
+.menu-toggle:focus-visible {
+    outline: 2px solid #2563EB;
+    outline-offset: 3px;
+}
+
+.topbar-actions {
+    color: #071D49;
+    font-size: 20px;
+}
+
+@media (min-width: 1051px) {
+    .menu-toggle {
+        display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .topbar {
+        padding: 12px 15px;
+    }
+
+    .topbar strong {
+        font-size: 16px;
+    }
+}
+
 .page-content { padding: 25px; }
 .page-heading {
     display:flex;

@@ -1,1 +1,672 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#071D49">
+
+    <title>Students | GRADEPRO</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        .students-page {
+            padding: 25px;
+        }
+
+        .page-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            color: #071D49;
+            font-size: 25px;
+            margin-bottom: 6px;
+        }
+
+        .page-heading p {
+            color: #64748B;
+            font-size: 14px;
+        }
+
+        .primary-btn {
+            background: #071D49;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 18px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .primary-btn:hover {
+            background: #123B73;
+        }
+
+        .student-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .student-stat {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #DCE4EF;
+        }
+
+        .student-stat span {
+            color: #64748B;
+            font-size: 13px;
+        }
+
+        .student-stat h2 {
+            color: #071D49;
+            font-size: 26px;
+            margin-top: 10px;
+        }
+
+        .student-stat i {
+            color: #2563EB;
+            margin-right: 7px;
+        }
+
+        .students-panel {
+            background: white;
+            border: 1px solid #DCE4EF;
+            border-radius: 12px;
+            padding: 22px;
+            overflow: hidden;
+        }
+
+        .students-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .students-toolbar h3 {
+            color: #071D49;
+        }
+
+        .search-box {
+            position: relative;
+            min-width: 230px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 13px;
+            top: 14px;
+            color: #64748B;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 12px 12px 38px;
+            border: 1px solid #DCE4EF;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .search-box input:focus,
+        .student-form input:focus,
+        .student-form select:focus {
+            border-color: #2563EB;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .students-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        .students-table th {
+            background: #F5F8FC;
+            color: #64748B;
+            text-align: left;
+            padding: 14px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .students-table td {
+            padding: 15px 14px;
+            border-bottom: 1px solid #E8EDF4;
+            color: #334155;
+            font-size: 13px;
+        }
+
+        .students-table tbody tr:hover {
+            background: #F8FAFD;
+        }
+
+        .student-name {
+            font-weight: 600;
+            color: #071D49;
+        }
+
+        .student-badge {
+            background: #EAF1FB;
+            color: #123B73;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 11px;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 45px 15px;
+            color: #64748B;
+        }
+
+        .empty-message i {
+            font-size: 35px;
+            color: #94A3B8;
+            margin-bottom: 12px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 29, 73, 0.55);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 550px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 14px;
+            padding: 25px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .modal-header h2 {
+            color: #071D49;
+            font-size: 20px;
+        }
+
+        .close-modal {
+            border: none;
+            background: #F1F5F9;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            color: #071D49;
+        }
+
+        .student-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            color: #334155;
+            font-weight: 600;
+        }
+
+        .student-form input,
+        .student-form select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #DCE4EF;
+            border-radius: 8px;
+            outline: none;
+            background: white;
+        }
+
+        .form-actions {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .cancel-btn {
+            padding: 12px 17px;
+            background: #F1F5F9;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .notice {
+            background: #FFF7E8;
+            color: #875A13;
+            border: 1px solid #F4D9A7;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            margin-bottom: 18px;
+        }
+
+        @media(max-width: 700px) {
+            .students-page {
+                padding: 15px;
+            }
+
+            .student-stats {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .students-toolbar {
+                align-items: stretch;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .student-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+                <h2>GRADEPRO</h2>
+                <small>ASSESS · ANALYSE · ACHIEVE</small>
+            </div>
+        </div>
+
+        <div class="school-info">
+            <div class="school-avatar">
+                <i class="fa-solid fa-school"></i>
+            </div>
+            <div>
+                <strong>My School</strong>
+                <small>School Administrator</small>
+            </div>
+        </div>
+
+        <nav class="navigation">
+
+            <p class="nav-heading">MAIN MENU</p>
+
+            <a href="index.html" class="nav-link">
+                <span><i class="fa-solid fa-gauge-high"></i></span>
+                Dashboard
+            </a>
+
+            <a href="students.html" class="nav-link active">
+                <span><i class="fa-solid fa-user-graduate"></i></span>
+                Students
+            </a>
+
+            <a href="teachers.html" class="nav-link">
+                <span><i class="fa-solid fa-chalkboard-user"></i></span>
+                Teachers
+            </a>
+
+            <a href="classes.html" class="nav-link">
+                <span><i class="fa-solid fa-chalkboard"></i></span>
+                Classes
+            </a>
+
+            <a href="subjects.html" class="nav-link">
+                <span><i class="fa-solid fa-book-open"></i></span>
+                Subjects
+            </a>
+
+            <p class="nav-heading">ACADEMICS</p>
+
+            <a href="marks.html" class="nav-link">
+                <span><i class="fa-solid fa-pen-to-square"></i></span>
+                Marks Management
+            </a>
+
+            <a href="reports.html" class="nav-link">
+                <span><i class="fa-solid fa-chart-column"></i></span>
+                Reports
+            </a>
+
+            <p class="nav-heading">SYSTEM</p>
+
+            <a href="#" class="nav-link">
+                <span><i class="fa-solid fa-gear"></i></span>
+                Settings
+            </a>
+
+            <a href="#" class="nav-link">
+                <span><i class="fa-solid fa-circle-question"></i></span>
+                Help & Support
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="admin-avatar">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div>
+                <strong>Administrator</strong>
+                <small>Account not connected</small>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button class="menu-button" id="menuButton"
+                        aria-label="Open menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div>
+                    <h3>Students</h3>
+                    <small>Student registration and records</small>
+                </div>
+
+            </div>
+
+            <div class="topbar-right">
+                <span class="academic-year">Academic Year 2026</span>
+
+                <button class="notification-button"
+                        aria-label="Notifications">
+                    <i class="fa-solid fa-bell"></i>
+                </button>
+            </div>
+
+        </header>
+
+
+        <!-- STUDENTS PAGE -->
+        <section class="students-page">
+
+            <div class="page-heading">
+                <div>
+                    <h1>Student Management</h1>
+                    <p>Register, organize and manage student records.</p>
+                </div>
+
+                <button class="primary-btn" id="openStudentModal">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Add New Student
+                </button>
+            </div>
+
+
+            <div class="notice">
+                <i class="fa-solid fa-circle-info"></i>
+                This is the initial interface. Student records will be
+                connected to the secure school database in a later step.
+            </div>
+
+
+            <!-- STUDENT STATISTICS -->
+            <div class="student-stats">
+
+                <div class="student-stat">
+                    <span>
+                        <i class="fa-solid fa-users"></i>
+                        Total Students
+                    </span>
+                    <h2 id="studentCount">0</h2>
+                </div>
+
+                <div class="student-stat">
+                    <span>
+                        <i class="fa-solid fa-user-check"></i>
+                        Active Students
+                    </span>
+                    <h2 id="activeStudentCount">0</h2>
+                </div>
+
+                <div class="student-stat">
+                    <span>
+                        <i class="fa-solid fa-user-group"></i>
+                        Classes Represented
+                    </span>
+                    <h2 id="classCount">0</h2>
+                </div>
+
+            </div>
+
+
+            <!-- STUDENT RECORDS -->
+            <div class="students-panel">
+
+                <div class="students-toolbar">
+
+                    <h3>
+                        <i class="fa-solid fa-address-book"></i>
+                        Student Records
+                    </h3>
+
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="search"
+                            id="studentSearch"
+                            placeholder="Search students..."
+                            aria-label="Search students">
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table class="students-table">
+
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Gender</th>
+                                <th>Class</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="studentsTableBody">
+                            <tr>
+                                <td colspan="6">
+                                    <div class="empty-message">
+                                        <i class="fa-solid fa-user-graduate"></i>
+                                        <h3>No students registered</h3>
+                                        <p>
+                                            Student records will appear here
+                                            after registration is connected.
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ADD STUDENT MODAL -->
+        <div class="modal" id="studentModal">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h2>
+                        <i class="fa-solid fa-user-plus"></i>
+                        Register Student
+                    </h2>
+
+                    <button class="close-modal" id="closeStudentModal"
+                            aria-label="Close form">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                </div>
+
+                <form class="student-form" id="studentForm">
+
+                    <div class="form-group">
+                        <label for="studentId">Student ID</label>
+                        <input type="text" id="studentId"
+                               placeholder="e.g. GP001" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="admissionNumber">Admission Number</label>
+                        <input type="text" id="admissionNumber"
+                               placeholder="Admission number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName"
+                               placeholder="First name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName"
+                               placeholder="Last name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" required>
+                            <option value="">Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentClass">Class</label>
+                        <select id="studentClass" required>
+                            <option value="">Select class</option>
+                            <option value="Senior 1">Senior 1</option>
+                            <option value="Senior 2">Senior 2</option>
+                            <option value="Senior 3">Senior 3</option>
+                            <option value="Senior 4">Senior 4</option>
+                            <option value="Senior 5">Senior 5</option>
+                            <option value="Senior 6">Senior 6</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="studentStatus">Status</label>
+                        <select id="studentStatus" required>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button type="button" class="cancel-btn"
+                                id="cancelStudentModal">
+                            Cancel
+                        </button>
+
+                        <button type="submit" class="primary-btn">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            Register Student
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="js/app.js"></script>
+<script src="js/students.js"></script>
+
+</body>
+</html>
+

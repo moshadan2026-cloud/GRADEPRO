@@ -4,56 +4,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#071D49">
+
     <title>GRADEPRO | Classes Management</title>
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/classes.css">
+
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
 
 <div class="app-container">
 
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
-        <div class="sidebar-brand">
-            <h2>GRADEPRO</h2>
-            <p>ASSESS · ANALYSE · ACHIEVE</p>
+
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div>
+                <h2>GRADEPRO</h2>
+                <small>ASSESS · ANALYSE · ACHIEVE</small>
+            </div>
         </div>
 
         <div class="school-info">
-            <h3>My School</h3>
-            <p>School Administrator</p>
+            <div class="school-avatar">
+                <i class="fa-solid fa-school"></i>
+            </div>
+
+            <div>
+                <strong>My School</strong>
+                <small>School Administrator</small>
+            </div>
         </div>
 
-        <nav class="sidebar-nav">
-            <a href="index.html"><i class="fas fa-home"></i> Dashboard</a>
-            <a href="students.html"><i class="fas fa-user-graduate"></i> Students</a>
-            <a href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> Teachers</a>
-            <a href="classes.html" class="active"><i class="fas fa-school"></i> Classes</a>
-            <a href="subjects.html"><i class="fas fa-book"></i> Subjects</a>
-            <a href="marks.html"><i class="fas fa-clipboard-check"></i> Marks Management</a>
-            <a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a>
+        <nav class="navigation">
+
+            <p class="nav-heading">MAIN MENU</p>
+
+            <a href="index.html" class="nav-link">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="students.html" class="nav-link">
+                <i class="fa-solid fa-user-graduate"></i>
+                <span>Students</span>
+            </a>
+
+            <a href="teachers.html" class="nav-link">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <span>Teachers</span>
+            </a>
+
+            <a href="classes.html" class="nav-link active">
+                <i class="fa-solid fa-school"></i>
+                <span>Classes</span>
+            </a>
+
+            <a href="subjects.html" class="nav-link">
+                <i class="fa-solid fa-book-open"></i>
+                <span>Subjects</span>
+            </a>
+
+            <p class="nav-heading">ACADEMICS</p>
+
+            <a href="marks.html" class="nav-link">
+                <i class="fa-solid fa-clipboard-check"></i>
+                <span>Marks Management</span>
+            </a>
+
+            <a href="reports.html" class="nav-link">
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Reports</span>
+            </a>
+
+            <p class="nav-heading">SYSTEM</p>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Help &amp; Support</span>
+            </a>
+
         </nav>
 
         <div class="sidebar-footer">
-            <p><i class="fas fa-user-circle"></i> Administrator</p>
+            <div class="admin-avatar">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+
+            <div>
+                <strong>Administrator</strong>
+                <small>Account not connected</small>
+            </div>
         </div>
+
     </aside>
 
+    <!-- MAIN CONTENT -->
     <div class="main-content">
 
         <header class="topbar">
-            <button class="menu-toggle" id="menuButton" type="button">
-                <i class="fas fa-bars"></i>
-            </button>
 
-            <h3>Classes Management</h3>
+            <div class="topbar-left">
 
-            <div class="topbar-actions">
-                <span>Academic Year: 2026</span>
+                <button class="menu-button" id="menuButton"
+                        type="button"
+                        aria-label="Open navigation menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div>
+                    <h3>Classes Management</h3>
+                    <small>Organise classes and manage class teachers</small>
+                </div>
+
             </div>
+
+            <div class="topbar-right">
+                <span class="academic-year">Academic Year 2026</span>
+
+                <button class="notification-button"
+                        type="button"
+                        aria-label="Notifications">
+                    <i class="fa-solid fa-bell"></i>
+                </button>
+            </div>
+
         </header>
 
         <main class="classes-page">
@@ -65,12 +153,13 @@
                 </div>
 
                 <button class="primary-btn" id="openClassModal">
-                    <i class="fas fa-plus"></i> Add New Class
+                    <i class="fa-solid fa-plus"></i>
+                    Add New Class
                 </button>
             </section>
 
             <div class="demo-notice">
-                <i class="fas fa-info-circle"></i>
+                <i class="fa-solid fa-circle-info"></i>
                 Demonstration mode: records are stored in this browser only.
                 Do not enter real student information.
             </div>
@@ -78,7 +167,10 @@
             <section class="class-stats">
 
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-school"></i></div>
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-school"></i>
+                    </div>
+
                     <div>
                         <p>Total Classes</p>
                         <h2 id="totalClasses">0</h2>
@@ -86,7 +178,10 @@
                 </div>
 
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-user-tie"></i></div>
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+
                     <div>
                         <p>Assigned Class Teachers</p>
                         <h2 id="assignedTeachers">0</h2>
@@ -94,7 +189,10 @@
                 </div>
 
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
                     <div>
                         <p>Total Capacity</p>
                         <h2 id="totalCapacity">0</h2>
@@ -106,20 +204,26 @@
             <section class="classes-panel">
 
                 <div class="panel-heading">
+
                     <div>
                         <h2>Class Records</h2>
                         <p>View and manage all school classes.</p>
                     </div>
 
                     <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="search" id="classSearch"
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input type="search"
+                               id="classSearch"
                                placeholder="Search classes...">
                     </div>
+
                 </div>
 
                 <div class="table-wrapper">
+
                     <table class="classes-table">
+
                         <thead>
                             <tr>
                                 <th>Class Name</th>
@@ -137,7 +241,9 @@
                                 </td>
                             </tr>
                         </tbody>
+
                     </table>
+
                 </div>
 
             </section>
@@ -145,46 +251,61 @@
         </main>
 
     </div>
+
 </div>
 
-<!-- Add / Edit Class Modal -->
+<!-- ADD / EDIT CLASS MODAL -->
 <div class="modal" id="classModal">
 
     <div class="modal-content">
 
         <div class="modal-header">
+
             <div>
                 <h2 id="classModalTitle">Add New Class</h2>
                 <p>Enter the class information below.</p>
             </div>
 
-            <button type="button" id="closeClassModal" class="close-btn">
+            <button type="button"
+                    id="closeClassModal"
+                    class="close-btn">
                 &times;
             </button>
+
         </div>
 
         <form id="classForm">
 
             <div class="form-group">
                 <label for="className">Class Name</label>
-                <input type="text" id="className"
-                       placeholder="e.g. Senior One" required>
+
+                <input type="text"
+                       id="className"
+                       placeholder="e.g. Senior One"
+                       required>
             </div>
 
             <div class="form-group">
                 <label for="classTeacher">Class Teacher</label>
-                <input type="text" id="classTeacher"
+
+                <input type="text"
+                       id="classTeacher"
                        placeholder="Enter teacher's name">
             </div>
 
             <div class="form-group">
                 <label for="classCapacity">Class Capacity</label>
-                <input type="number" id="classCapacity"
-                       min="1" placeholder="e.g. 60" required>
+
+                <input type="number"
+                       id="classCapacity"
+                       min="1"
+                       placeholder="e.g. 60"
+                       required>
             </div>
 
             <div class="form-group">
                 <label for="academicLevel">Academic Level</label>
+
                 <select id="academicLevel" required>
                     <option value="">Select academic level</option>
                     <option value="Lower Secondary">Lower Secondary</option>
@@ -194,17 +315,23 @@
             </div>
 
             <div class="form-actions">
-                <button type="button" id="cancelClassModal"
-                        class="cancel-btn">Cancel</button>
+
+                <button type="button"
+                        id="cancelClassModal"
+                        class="cancel-btn">
+                    Cancel
+                </button>
 
                 <button type="submit" class="primary-btn">
                     Save Class
                 </button>
+
             </div>
 
         </form>
 
     </div>
+
 </div>
 
 <script src="js/app.js"></script>
@@ -212,4 +339,3 @@
 
 </body>
 </html>
-

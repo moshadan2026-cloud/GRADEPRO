@@ -1,3 +1,4 @@
+
 /* =====================================
    GRADEPRO - MAIN STYLESHEET
    ASSESS · ANALYSE · ACHIEVE
@@ -49,7 +50,9 @@ button {
     min-height: 100vh;
 }
 
-/* SIDEBAR */
+/* =====================================
+   SIDEBAR
+===================================== */
 
 .sidebar {
     width: 260px;
@@ -165,6 +168,41 @@ button {
     border-left: 3px solid #79AEFF;
 }
 
+/* Support the sidebar navigation used by inner pages */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 12px;
+    border-radius: 9px;
+    color: #D6E2F3;
+    font-size: 13px;
+    margin-bottom: 4px;
+    transition: 0.2s ease;
+}
+
+.sidebar-nav a i {
+    width: 22px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    background: #173D72;
+    color: white;
+}
+
+.sidebar-nav a.active {
+    border-left: 3px solid #79AEFF;
+}
+
 .sidebar-footer {
     display: flex;
     align-items: center;
@@ -174,7 +212,9 @@ button {
     margin-top: auto;
 }
 
-/* MAIN CONTENT */
+/* =====================================
+   MAIN CONTENT AND TOPBAR
+===================================== */
 
 .main-content {
     flex: 1;
@@ -189,6 +229,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 15px;
 }
 
 .topbar-left {
@@ -197,8 +238,10 @@ button {
     gap: 15px;
 }
 
-.topbar h3 {
+.topbar h3,
+.topbar strong {
     font-size: 17px;
+    color: var(--navy);
 }
 
 .topbar small {
@@ -214,6 +257,13 @@ button {
     gap: 16px;
 }
 
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--navy);
+}
+
 .academic-year {
     background: var(--pale-blue);
     color: var(--blue);
@@ -223,19 +273,52 @@ button {
     font-weight: bold;
 }
 
+/* Notification and hamburger buttons */
+
 .notification-button,
-.menu-button {
-    background: none;
+.menu-button,
+.menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
     border: none;
     color: var(--navy);
     font-size: 21px;
+    cursor: pointer;
+    border-radius: 8px;
 }
 
-.menu-button {
+.notification-button {
+    width: 42px;
+    height: 42px;
+}
+
+.menu-button,
+.menu-toggle {
     display: none;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    flex-shrink: 0;
 }
 
-/* DASHBOARD CONTENT */
+.notification-button:hover,
+.menu-button:hover,
+.menu-toggle:hover {
+    background: var(--pale-blue);
+}
+
+.menu-button:focus-visible,
+.menu-toggle:focus-visible,
+.notification-button:focus-visible {
+    outline: 2px solid var(--royal);
+    outline-offset: 3px;
+}
+
+/* =====================================
+   DASHBOARD CONTENT
+===================================== */
 
 .dashboard-content {
     padding: 30px;
@@ -278,7 +361,9 @@ button {
     opacity: 0.9;
 }
 
-/* STATISTICS */
+/* =====================================
+   STATISTICS
+===================================== */
 
 .statistics-grid {
     display: grid;
@@ -347,7 +432,9 @@ button {
     font-size: 11px;
 }
 
-/* ANALYTICS */
+/* =====================================
+   ANALYTICS
+===================================== */
 
 .analytics-grid {
     display: grid;
@@ -393,7 +480,9 @@ button {
     position: relative;
 }
 
-/* LOWER DASHBOARD */
+/* =====================================
+   LOWER DASHBOARD
+===================================== */
 
 .bottom-grid {
     display: grid;
@@ -448,9 +537,12 @@ button {
     font-size: 10px;
 }
 
-/* TABLET */
+/* =====================================
+   TABLET
+===================================== */
 
 @media (max-width: 1050px) {
+
     .statistics-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -460,7 +552,9 @@ button {
     }
 }
 
-/* MOBILE */
+/* =====================================
+   MOBILE
+===================================== */
 
 @media (max-width: 700px) {
 
@@ -470,6 +564,8 @@ button {
         top: 0;
         bottom: 0;
         width: 260px;
+        height: 100vh;
+        overflow-y: auto;
         z-index: 1000;
         transition: left 0.3s ease;
     }
@@ -478,8 +574,13 @@ button {
         left: 0;
     }
 
-    .menu-button {
-        display: block;
+    /* Show both supported hamburger button classes */
+
+    .menu-button,
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .topbar {
@@ -487,11 +588,13 @@ button {
         padding: 0 15px;
     }
 
-    .topbar h3 {
+    .topbar h3,
+    .topbar strong {
         font-size: 15px;
     }
 
-    .topbar-right {
+    .topbar-right,
+    .topbar-actions {
         gap: 9px;
     }
 
@@ -561,7 +664,9 @@ button {
     }
 }
 
-/* SMALL PHONES */
+/* =====================================
+   SMALL PHONES
+===================================== */
 
 @media (max-width: 360px) {
 
@@ -576,4 +681,4 @@ button {
     .statistics-grid {
         grid-template-columns: 1fr 1fr;
     }
-      }
+}

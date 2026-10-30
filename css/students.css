@@ -1,1 +1,393 @@
 
+/* =====================================
+   GRADEPRO - STUDENTS MANAGEMENT
+   ASSESS · ANALYSE · ACHIEVE
+===================================== */
+
+/* PAGE LAYOUT */
+
+.page-content,
+.students-page {
+    padding: 25px;
+}
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.page-heading h1 {
+    color: #123B73;
+    font-size: 25px;
+    margin-bottom: 6px;
+}
+
+.page-heading p {
+    color: #64748B;
+    font-size: 14px;
+}
+
+/* BUTTONS */
+
+.primary-btn {
+    background: #071D49;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    transition: background 0.2s ease;
+}
+
+.primary-btn:hover {
+    background: #123B73;
+}
+
+.cancel-btn {
+    padding: 12px 17px;
+    background: #F1F5F9;
+    color: #334155;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* NOTICE */
+
+.notice {
+    background: #FFF7E8;
+    color: #875A13;
+    border: 1px solid #F4D9A7;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-bottom: 18px;
+}
+
+/* STUDENT STATISTICS */
+
+.student-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.student-stat {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #DCE4EF;
+    box-shadow: 0 3px 12px rgba(7, 29, 73, 0.03);
+}
+
+.student-stat span {
+    color: #64748B;
+    font-size: 13px;
+}
+
+.student-stat h2 {
+    color: #071D49;
+    font-size: 26px;
+    margin-top: 10px;
+}
+
+.student-stat i {
+    color: #2563EB;
+    margin-right: 7px;
+}
+
+/* STUDENT RECORDS PANEL */
+
+.students-panel {
+    background: white;
+    border: 1px solid #DCE4EF;
+    border-radius: 12px;
+    padding: 22px;
+    overflow: hidden;
+}
+
+.students-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.students-toolbar h3 {
+    color: #071D49;
+}
+
+.search-box {
+    position: relative;
+    min-width: 230px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 13px;
+    top: 14px;
+    color: #64748B;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 12px 12px 38px;
+    border: 1px solid #DCE4EF;
+    border-radius: 8px;
+    outline: none;
+}
+
+.search-box input:focus,
+.student-form input:focus,
+.student-form select:focus {
+    border-color: #2563EB;
+}
+
+/* STUDENTS TABLE */
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.students-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+.students-table th {
+    background: #F5F8FC;
+    color: #64748B;
+    text-align: left;
+    padding: 14px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.students-table td {
+    padding: 15px 14px;
+    border-bottom: 1px solid #E8EDF4;
+    color: #334155;
+    font-size: 13px;
+}
+
+.students-table tbody tr:hover {
+    background: #F8FAFD;
+}
+
+.student-name {
+    font-weight: 600;
+    color: #071D49;
+}
+
+.student-badge {
+    background: #EAF1FB;
+    color: #123B73;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+}
+
+.empty-message {
+    text-align: center;
+    padding: 45px 15px;
+    color: #64748B;
+}
+
+.empty-message i {
+    display: block;
+    font-size: 35px;
+    color: #94A3B8;
+    margin-bottom: 12px;
+}
+
+/* STUDENT REGISTRATION MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 29, 73, 0.55);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 14px;
+    padding: 25px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.modal-header h2 {
+    color: #071D49;
+    font-size: 20px;
+}
+
+.close-modal {
+    border: none;
+    background: #F1F5F9;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    color: #071D49;
+    font-size: 18px;
+}
+
+/* REGISTRATION FORM */
+
+.student-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 13px;
+    color: #334155;
+    font-weight: 600;
+}
+
+.student-form input,
+.student-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #DCE4EF;
+    border-radius: 8px;
+    outline: none;
+    background: white;
+}
+
+.form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* SIDEBAR COMPATIBILITY */
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 15px;
+}
+
+.navigation .nav-heading {
+    color: #94A3B8;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 15px 0 8px;
+}
+
+.navigation .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    color: #CBD5E1;
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.2s ease;
+}
+
+.navigation .nav-link span {
+    width: 20px;
+    text-align: center;
+}
+
+.navigation .nav-link:hover,
+.navigation .nav-link.active {
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 900px) {
+    .student-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .page-content,
+    .students-page {
+        padding: 15px;
+    }
+
+    .student-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .students-toolbar {
+        align-items: stretch;
+    }
+
+    .search-box {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .student-form {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    .modal-content {
+        padding: 18px;
+    }
+
+    .page-heading .primary-btn {
+        width: 100%;
+    }
+}
+

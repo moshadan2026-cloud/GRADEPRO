@@ -2,228 +2,371 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GRADEPRO | Teachers Management</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#123B73">
 
-<link rel="stylesheet" href="css/style.css">
+    <title>GRADEPRO | Teachers Management</title>
+
+    <!-- Main stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/teachers.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
 
-<div class="sidebar" id="sidebar">
-    <div class="brand">
-        <i class="fa-solid fa-graduation-cap"></i>
-        <div>
-            <h2>GRADEPRO</h2>
-            <small>ASSESS · ANALYSE · ACHIEVE</small>
-        </div>
-    </div>
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
 
-    <div class="school-info">
-        <i class="fa-solid fa-school"></i>
-        <div>
-            <strong>My School</strong>
-            <small>School Administrator</small>
-        </div>
-    </div>
-
-    <nav class="sidebar-nav">
-        <a href="index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
-        <a href="students.html"><i class="fa-solid fa-user-graduate"></i> Students</a>
-        <a href="teachers.html" class="active"><i class="fa-solid fa-chalkboard-user"></i> Teachers</a>
-        <a href="classes.html"><i class="fa-solid fa-chalkboard"></i> Classes</a>
-        <a href="subjects.html"><i class="fa-solid fa-book-open"></i> Subjects</a>
-        <a href="marks.html"><i class="fa-solid fa-pen-to-square"></i> Marks Management</a>
-        <a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a>
-        <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
-        <a href="#"><i class="fa-solid fa-circle-question"></i> Help & Support</a>
-    </nav>
-
-    <div class="sidebar-footer">
-        <i class="fa-solid fa-user-shield"></i>
-        <span>Administrator account</span>
-    </div>
-</div>
-
-<div class="main-content">
-<header class="topbar">
-    <button class="menu-toggle" id="menuButton" aria-label="Open menu">
-        <i class="fa-solid fa-bars"></i>
-    </button>
-
-    
-        <div>
-            <strong>Teachers Management</strong>
-        </div>
-        <div class="topbar-actions">
-            <i class="fa-regular fa-bell"></i>
-        </div>
-    </header>
-
-    <main class="page-content">
-
-        <section class="page-heading">
+        <div class="brand">
+            <i class="fa-solid fa-graduation-cap"></i>
             <div>
-                <h1>Teachers Management</h1>
-                <p>Register, organise and manage your school's teaching staff.</p>
+                <h2>GRADEPRO</h2>
+                <small>ASSESS · ANALYSE · ACHIEVE</small>
             </div>
-            <button class="primary-btn" id="openTeacherModal">
-                <i class="fa-solid fa-plus"></i> Add New Teacher
-            </button>
-        </section>
-
-        <div class="demo-notice">
-            <i class="fa-solid fa-circle-info"></i>
-            <strong>Prototype mode:</strong> Teacher records are currently stored
-            in this browser only. Do not enter real school staff information.
         </div>
 
-        <section class="teacher-stats">
-            <div class="teacher-stat">
-                <i class="fa-solid fa-users"></i>
-                <span>Total Teachers</span>
-                <h2 id="teacherCount">0</h2>
+        <div class="school-info">
+            <i class="fa-solid fa-school"></i>
+            <div>
+                <strong>My School</strong>
+                <small>School Administrator</small>
             </div>
-
-            <div class="teacher-stat">
-                <i class="fa-solid fa-user-check"></i>
-                <span>Active Teachers</span>
-                <h2 id="activeTeacherCount">0</h2>
-            </div>
-
-            <div class="teacher-stat">
-                <i class="fa-solid fa-book"></i>
-                <span>Subjects Taught</span>
-                <h2 id="teacherSubjectCount">0</h2>
-            </div>
-        </section>
-
-        <section class="table-panel">
-            <div class="table-tools">
-                <h2>Registered Teachers</h2>
-                <input
-                    type="search"
-                    class="search-box"
-                    id="teacherSearch"
-                    placeholder="Search teachers..."
-                    aria-label="Search teachers"
-                >
-            </div>
-
-            <div class="table-scroll">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Teacher ID</th>
-                            <th>Teacher Name</th>
-                            <th>Gender</th>
-                            <th>Subject</th>
-                            <th>Phone</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="teachersTableBody">
-                        <tr>
-                            <td colspan="7" class="empty-state">
-                                No teachers registered yet.
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-    </main>
-</div>
-
-<!-- Teacher Registration Modal -->
-<div class="modal" id="teacherModal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2 id="teacherModalTitle">Register New Teacher</h2>
-            <button class="close-btn" id="closeTeacherModal" aria-label="Close">
-                &times;
-            </button>
         </div>
 
-        <form id="teacherForm">
-            <div class="form-grid">
+        <nav class="sidebar-nav" aria-label="Main navigation">
 
-                <div class="form-group">
-                    <label for="teacherId">Teacher ID *</label>
-                    <input type="text" id="teacherId" required placeholder="e.g. TCH001">
-                </div>
+            <a href="index.html">
+                <i class="fa-solid fa-gauge"></i>
+                Dashboard
+            </a>
 
-                <div class="form-group">
-                    <label for="staffNumber">Staff Number *</label>
-                    <input type="text" id="staffNumber" required placeholder="e.g. STF001">
-                </div>
+            <a href="students.html">
+                <i class="fa-solid fa-user-graduate"></i>
+                Students
+            </a>
 
-                <div class="form-group">
-                    <label for="teacherFirstName">First Name *</label>
-                    <input type="text" id="teacherFirstName" required>
-                </div>
+            <a href="teachers.html" class="active" aria-current="page">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                Teachers
+            </a>
 
-                <div class="form-group">
-                    <label for="teacherLastName">Last Name *</label>
-                    <input type="text" id="teacherLastName" required>
-                </div>
+            <a href="classes.html">
+                <i class="fa-solid fa-chalkboard"></i>
+                Classes
+            </a>
 
-                <div class="form-group">
-                    <label for="teacherGender">Gender *</label>
-                    <select id="teacherGender" required>
-                        <option value="">Select gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
+            <a href="subjects.html">
+                <i class="fa-solid fa-book-open"></i>
+                Subjects
+            </a>
 
-                <div class="form-group">
-                    <label for="teacherPhone">Phone Number</label>
-                    <input type="tel" id="teacherPhone" placeholder="Phone number">
-                </div>
+            <a href="marks.html">
+                <i class="fa-solid fa-pen-to-square"></i>
+                Marks Management
+            </a>
 
-                <div class="form-group">
-                    <label for="teacherEmail">Email Address</label>
-                    <input type="email" id="teacherEmail" placeholder="Email address">
-                </div>
+            <a href="reports.html">
+                <i class="fa-solid fa-chart-column"></i>
+                Reports
+            </a>
 
-                <div class="form-group">
-                    <label for="teacherSubject">Main Subject *</label>
-                    <input type="text" id="teacherSubject" required placeholder="e.g. Mathematics">
-                </div>
+            <a href="#">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
 
-                <div class="form-group">
-                    <label for="teacherStatus">Employment Status *</label>
-                    <select id="teacherStatus" required>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
-                    </select>
-                </div>
+            <a href="#">
+                <i class="fa-solid fa-circle-question"></i>
+                Help &amp; Support
+            </a>
 
+        </nav>
+
+        <div class="sidebar-footer">
+            <i class="fa-solid fa-user-shield"></i>
+            <span>Administrator account</span>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <button
+                type="button"
+                class="menu-toggle"
+                id="menuButton"
+                aria-label="Open navigation menu"
+                aria-controls="sidebar"
+                aria-expanded="false"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div>
+                <strong>Teachers Management</strong>
             </div>
 
-            <div class="form-actions">
-                <button type="button" class="secondary-btn" id="cancelTeacherModal">
-                    Cancel
-                </button>
-                <button type="submit" class="primary-btn" id="saveTeacherBtn">
-                    Save Teacher
+            <div class="topbar-actions">
+                <button type="button" class="notification-button" aria-label="Notifications">
+                    <i class="fa-regular fa-bell"></i>
                 </button>
             </div>
-        </form>
+
+        </header>
+
+
+        <!-- PAGE CONTENT -->
+        <main class="page-content">
+
+            <section class="page-heading">
+
+                <div>
+                    <h1>Teachers Management</h1>
+                    <p>Register, organise and manage your school's teaching staff.</p>
+                </div>
+
+                <button type="button" class="primary-btn" id="openTeacherModal">
+                    <i class="fa-solid fa-plus"></i>
+                    Add New Teacher
+                </button>
+
+            </section>
+
+
+            <!-- DEMO NOTICE -->
+            <div class="demo-notice">
+                <i class="fa-solid fa-circle-info"></i>
+                <strong>Prototype mode:</strong>
+                Teacher records are currently stored in this browser only.
+                Do not enter real school staff information.
+            </div>
+
+
+            <!-- STATISTICS -->
+            <section class="teacher-stats">
+
+                <div class="teacher-stat">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Total Teachers</span>
+                    <h2 id="teacherCount">0</h2>
+                </div>
+
+                <div class="teacher-stat">
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>Active Teachers</span>
+                    <h2 id="activeTeacherCount">0</h2>
+                </div>
+
+                <div class="teacher-stat">
+                    <i class="fa-solid fa-book"></i>
+                    <span>Subjects Taught</span>
+                    <h2 id="teacherSubjectCount">0</h2>
+                </div>
+
+            </section>
+
+
+            <!-- TEACHERS TABLE -->
+            <section class="table-panel">
+
+                <div class="table-tools">
+                    <h2>Registered Teachers</h2>
+
+                    <input
+                        type="search"
+                        class="search-box"
+                        id="teacherSearch"
+                        placeholder="Search teachers..."
+                        aria-label="Search teachers"
+                    >
+                </div>
+
+                <div class="table-scroll">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Teacher ID</th>
+                                <th>Teacher Name</th>
+                                <th>Gender</th>
+                                <th>Subject</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="teachersTableBody">
+
+                            <tr>
+                                <td colspan="7" class="empty-state">
+                                    No teachers registered yet.
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
     </div>
-</div>
 
-<script src="js/app.js"></script>
-<script src="js/teachers.js"></script>
+
+    <!-- TEACHER REGISTRATION MODAL -->
+    <div
+        class="modal"
+        id="teacherModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="teacherModalTitle"
+    >
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2 id="teacherModalTitle">Register New Teacher</h2>
+
+                <button
+                    type="button"
+                    class="close-btn"
+                    id="closeTeacherModal"
+                    aria-label="Close registration form"
+                >
+                    &times;
+                </button>
+
+            </div>
+
+
+            <form id="teacherForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="teacherId">Teacher ID *</label>
+                        <input
+                            type="text"
+                            id="teacherId"
+                            required
+                            placeholder="e.g. TCH001"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="staffNumber">Staff Number *</label>
+                        <input
+                            type="text"
+                            id="staffNumber"
+                            required
+                            placeholder="e.g. STF001"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teacherFirstName">First Name *</label>
+                        <input type="text" id="teacherFirstName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teacherLastName">Last Name *</label>
+                        <input type="text" id="teacherLastName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teacherGender">Gender *</label>
+                        <select id="teacherGender" required>
+                            <option value="">Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teacherPhone">Phone Number</label>
+                        <input
+                            type="tel"
+                            id="teacherPhone"
+                            placeholder="Phone number"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teacherEmail">Email Address</label>
+                        <input
+                            type="email"
+                            id="teacherEmail"
+                            placeholder="Email address"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teacherSubject">Main Subject *</label>
+                        <input
+                            type="text"
+                            id="teacherSubject"
+                            required
+                            placeholder="e.g. Mathematics"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teacherStatus">Employment Status *</label>
+                        <select id="teacherStatus" required>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        id="cancelTeacherModal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                        id="saveTeacherBtn"
+                    >
+                        Save Teacher
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="js/app.js"></script>
+    <script src="js/teachers.js"></script>
 
 </body>
 </html>
-
